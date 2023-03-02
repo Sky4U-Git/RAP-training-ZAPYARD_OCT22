@@ -1,0 +1,7 @@
+@EndUserText.label: 'Service definition for PO app'
+define service ZAS_PO_SERV_DEF {
+  expose ZC_AS_PO_HEADER as PurchaseHeader;
+  expose ZC_AS_PO_ITEM as PurchaseItem;
+  expose ZC_as_po_status as status;
+  expose ZC_AS_supplier as Supplier;
+}

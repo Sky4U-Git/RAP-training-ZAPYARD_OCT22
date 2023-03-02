@@ -1,0 +1,63 @@
+@Metadata.layer: #CORE
+@UI.headerInfo:{    typeName: 'Purchase Item',
+                    typeNamePlural: 'Purchase Items',
+                    title: { value: 'Shorttext' },
+                    description:{ label: 'Manage Purchase Orders',
+                                  type: #STANDARD,
+                                  value: 'PurchaseItem' }
+                                  }
+annotate entity ZC_AS_CDS_ITEM_PO with
+{
+  @UI.facet: [{ id: 'ItemObj',
+                  type: #COLLECTION,
+                  label: 'General Information',
+                  purpose: #STANDARD }]
+//                  { id: 'General',
+//                    parentId: 'ItemObj',
+//                    type: #FIELDGROUP_REFERENCE,
+//                    targetQualifier: 'LineItem',
+//                    position: 10 }]
+  @UI.fieldGroup: [{ position: 1, label: 'Purchase Order Number', qualifier: 'LineItem' }]
+  PurchaseOrder;
+  @UI.lineItem: [{ position: 1 , qualifier: 'Items' }]
+  @UI.fieldGroup: [{ position: 2, label: 'Purchase Order Item', qualifier: 'LineItem' }]
+  @UI.identification: [{ position: 10, label: 'Item Description' }]
+  PurchaseItem;
+  @UI.lineItem: [{ position: 2 , qualifier: 'Items' , label: 'Item Description' }]
+  @UI.fieldGroup: [{ position: 3, label: 'Item Description', qualifier: 'LineItem' }]
+  @UI.identification: [{ position: 20, label: 'Item text' }]
+  ShortText;
+  @UI.lineItem: [{ position: 3 , qualifier: 'Items' , label: 'Material'}]
+  @UI.fieldGroup: [{ position: 4, label: 'Material Number', qualifier: 'LineItem' }]
+  @UI.identification: [{ position: 30, label: 'Material' }]
+  Material;
+  @UI.lineItem: [{ position: 5 , qualifier: 'Items' , label: 'Plant'}]
+  @UI.fieldGroup: [{ position: 5, label: 'Plant', qualifier: 'LineItem' }]
+  @UI.identification: [{ position: 40, label: 'Plant' }]
+  Plant;
+  @UI.lineItem: [{ position: 4 , qualifier: 'Items', label: 'Material Group' }]
+  @UI.fieldGroup: [{ position: 6, label: 'Material Group', qualifier: 'LineItem' }]
+  @UI.identification: [{ position: 50, label: 'Material Group' }]
+  MaterialGroup;
+  @UI.lineItem: [{ position: 6 , qualifier: 'Items', label: 'Quantity' }]
+  @UI.fieldGroup: [{ position: 7, label: 'Quantity', qualifier: 'LineItem' }]
+  @UI.identification: [{ position: 60, label: 'Quantity' }]
+  OrderQunt;
+  @UI.identification: [{ position: 60, label: 'Unit' }]
+  OrderUnit;
+  @UI.lineItem: [{ position: 7 , qualifier: 'Items' , label: 'Price' }]
+  @UI.fieldGroup: [{ position: 8, label: 'Price', qualifier: 'LineItem' }]
+  @UI.identification: [{ position: 70, label: 'Price' }]
+  ProductPrice;
+  //   PriceUnit;
+  @UI.lineItem: [{ position: 8 , qualifier: 'Items', label: 'Total Price' }]
+  @UI.fieldGroup: [{ position: 9, label: 'Toatal Item Price', qualifier: 'LineItem' }]
+  @UI.identification: [{ position: 80, label: 'Total Item Price' }]
+  ItemPrice;
+  //   LocalLastChangedBy;
+  //   /* Associations */
+  //   _Currency;
+  //   _PurchaseHeader;
+
+
+}

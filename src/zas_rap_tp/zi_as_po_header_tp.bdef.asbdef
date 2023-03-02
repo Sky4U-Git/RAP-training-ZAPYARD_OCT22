@@ -1,0 +1,109 @@
+managed implementation in class zbp_i_as_po_header_tp unique;
+strict ( 2 );
+
+with draft;
+define behavior for ZI_AS_PO_HEADER_TP //alias <alias_name>
+persistent table zas_po_header_db
+draft table zas_po_header_dt
+lock master
+total etag LastChangedAt
+early numbering
+authorization master ( instance )
+etag master ChangedDateTime
+{
+  field ( readonly ) PurchaseOrder, PurchaseTotalPrice, PriceUnit;
+  field ( mandatory ) Description, OrderType, OrderStatus;
+  create;
+  update;
+  delete;
+  association _PurchaseItems { create; with draft; }
+  association _PoAttachments { create; with draft; }
+  action Copy result [1] $self;
+  action WithdrawApproval result [1] $self;
+  action Approve result [1] $self;
+
+  validation OrderStatus on save { create; update; field OrderStatus; }
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare
+  {
+    validation OrderStatus;
+  }
+
+  mapping for zas_po_header_db
+  {
+    PurchaseOrder = po_order;
+    Description = po_desc;
+    CompanyCode = comp_code;
+    CreateBy = create_by;
+    CreatedDateTime = created_date_time;
+    ChangedDateTime = changed_date_time;
+    OrderType = po_type;
+    Organization = po_org;
+    OrderStatus = po_status;
+    Supplier = supplier;
+    LocalLastChangedBy = local_last_changed_by;
+    LastChangedAt = last_changed_at;
+  }
+}
+
+define behavior for ZI_AS_PO_item_TP //alias <alias_name>
+implementation in class zbp_i_as_po_item_tp unique
+persistent table zas_po_item_db
+draft table zas_po_item_dt
+lock dependent by _purchaseHeader
+early numbering
+authorization dependent by _purchaseHeader
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) PurchaseOrder;
+  association _purchaseHeader { with draft; }
+
+  determination CalculateTotalPrice on save { create; field OrderQunt, OrderUnit, ProductPrice, PriceUnit; }
+
+  mapping for zas_po_item_db
+  {
+    PurchaseOrder = po_order;
+    PurchaseItem = po_item;
+    ProductPrice = product_price;
+    Material = material;
+    MaterialGroup = mat_group;
+    PriceUnit = price_unit;
+    ShortText = short_text;
+    OrderQunt = order_qunt;
+    OrderUnit = order_unit;
+    Plant = plant;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
+
+define behavior for zi_as_po_attach_tp
+implementation in class zbp_i_as_po_attach_tp unique
+persistent table zas_po_attachmnt
+draft table zas_po_attach_dt
+lock dependent by _PurchaseHeader
+early numbering
+authorization dependent by _purchaseHeader
+etag master LastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) PurchaseOrder, AttachId;
+  association _PurchaseHeader { with draft; }
+
+  mapping for zas_po_attachmnt
+  {
+    PurchaseOrder = po_order;
+    AttachId = attach_id;
+    Attachment = attachment;
+    Mimetype = mimetype;
+    Filename = filename;
+    LastChangedAt = last_changed_at;
+  }
+}

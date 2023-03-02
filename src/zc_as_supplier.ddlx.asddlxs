@@ -1,0 +1,17 @@
+@Metadata.layer: #CORE
+annotate entity ZC_AS_supplier with
+{
+  @UI.hidden: true
+  Supplierid;
+  @UI.identification: [{ position: 10 , label: 'Supplier Name' }]
+  SupplierName;
+  @UI.identification: [{ position: 20 , label: 'E-mail'}]
+  EmailAddress;
+  @UI.identification: [{ position: 30 , label: 'Contact No.' }]
+  PhoneNumber;
+  @UI.identification: [{ position: 40 , label: 'Fax'}]
+  FaxNumber;
+  @UI.identification: [{ position: 50 , label: 'Website' }]
+  WebAddress;
+
+}

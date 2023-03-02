@@ -1,0 +1,10 @@
+@EndUserText.label: 'Service definition: Unmanged PO'
+define service ZAS_PO_SERV_UM {
+  expose ZC_AS_PO_HEAD_UM as PurchaseHeader;
+  expose ZC_AS_PO_ITEM_UM as PurchaseItem;
+  expose ZC_AS_supplier as Supplier;
+  expose ZC_AS_Ordertype as OrderType;
+  expose ZC_as_po_status as OrderStatus;
+  expose I_Currency as Currency;
+  expose I_UnitOfMeasure as Measures;
+}

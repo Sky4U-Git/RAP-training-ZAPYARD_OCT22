@@ -1,0 +1,8 @@
+@EndUserText.label: 'Service definition with behaviour: PO'
+define service ZAS_PO_SERV_DEF_BEHV {
+  expose ZC_AS_CDS_HEAD_PO as PurchaseOrders;
+  expose ZC_AS_CDS_ITEM_PO as PurchaseItems;
+  expose ZC_AS_supplier as Supplier;
+  expose ZC_as_po_status as OrderStatus;
+  expose ZC_AS_Ordertype as OrderType;
+}

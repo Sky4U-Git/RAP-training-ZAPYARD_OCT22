@@ -1,0 +1,11 @@
+@EndUserText.label: 'Manager PO service'
+define service ZAS_MANAGE_PO_TP {
+  expose ZC_AS_PO_HEADER_TP as PurchaseOrder;
+  expose ZC_AS_PO_ITEM_TP as PurchaseItems;
+  expose ZC_AS_PO_ATTACH_TP as Attachments;
+  expose ZC_AS_supplier as Supplier;
+  expose ZC_AS_Ordertype as OrderType;
+  expose ZC_as_po_status as OrderStatus;
+  expose I_Currency as Currency;
+  expose I_UnitOfMeasure as Measures;
+}
